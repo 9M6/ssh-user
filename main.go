@@ -5,7 +5,9 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"os"
+	"os/exec"
 	"path"
 	"strings"
 
@@ -35,13 +37,13 @@ func main() {
 	// Fetch user home directory
 	home, err := os.UserHomeDir()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	// Get current working directory
 	wdir, err := os.Getwd()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	// Appends the Home root folder to the relative route
@@ -57,13 +59,13 @@ func main() {
 	// Pull up file and check if there's an error
 	f, err := os.Open(*confFlag)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	// Decode the config file to a struct
 	c, err := ssh_config.Decode(f)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	// Display the list of configurations in the .ssh/config
@@ -95,7 +97,19 @@ func main() {
 				if t.Key != "IdentityFile" {
 					continue
 				}
-				t.Value = fmt.Sprintf("~/.ssh/%s", identity)
+				// ssh Identity Path
+				identityLocation := path.Join(home, ".ssh", identity)
+
+				// Replace the default value
+				t.Value = identityLocation
+
+				// Add a key to the ssh-agent and the keychain
+				cmd := exec.Command("ssh-add", "-K", identityLocation)
+
+				// Run the command and check for errors
+				if err := cmd.Run(); err != nil {
+					log.Fatal(err)
+				}
 			}
 		}
 
@@ -106,12 +120,12 @@ func main() {
 	// Marshal text to bytes
 	mt, err := c.MarshalText()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
 	// Write the changes to file
 	err = ioutil.WriteFile(*confFlag, mt, 0644)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
