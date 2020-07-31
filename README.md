@@ -60,5 +60,5 @@ $ ssh-user -host=github.com 0x0042
 
 To use a different config file
 ```shell script
-$ ssh-user -config ./my/working/directory 0x0042
+$ ssh-user -config ./my/working/config 0x0042
 ```
