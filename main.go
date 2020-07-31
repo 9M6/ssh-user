@@ -16,7 +16,7 @@ var (
 	helpFlag = flag.Bool("help", false, "display help message of the command line")
 	hostFlag = flag.String("host", "*", "Set the default host value you want to target")
 	listFlag = flag.Bool("list", false, "List the configurations in .ssh/config file")
-	confFlag = flag.String("config", ".ssh/config", "default config file of the SSH, ")
+	confFlag = flag.String("config", ".ssh/config", "default config file of the SSH")
 )
 
 func main() {
