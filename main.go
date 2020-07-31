@@ -15,6 +15,7 @@ import (
 var (
 	helpFlag = flag.Bool("help", false, "display help message of the command line")
 	hostFlag = flag.String("host", "*", "Set the default host value you want to target")
+	listFlag = flag.Bool("list", false, "List the configurations in .ssh/config file")
 	confFlag = flag.String("config", ".ssh/config", "default config file of the SSH, ")
 )
 
@@ -30,11 +31,6 @@ func main() {
 
 	// Return arguments in command line
 	identity := flag.Arg(0)
-
-	// Check if there is at least one argument in the command line
-	if flag.NArg() < 1 {
-		panic("no argument given to the command line")
-	}
 
 	// Fetch user home directory
 	home, err := os.UserHomeDir()
@@ -68,6 +64,17 @@ func main() {
 	c, err := ssh_config.Decode(f)
 	if err != nil {
 		panic(err)
+	}
+
+	// Display the list of configurations in the .ssh/config
+	if *listFlag {
+		fmt.Println(c.String())
+		return
+	}
+
+	// Check if there is at least one argument in the command line
+	if flag.NArg() < 1 {
+		panic("no argument given to the command line")
 	}
 
 	for _, host := range c.Hosts {
