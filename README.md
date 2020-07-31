@@ -9,12 +9,12 @@ simple modification, we can switch keys on the fly, and gives us a "multi-user" 
 If you have multi-github accounts, this script will allow you to push changes to your selected account
 given that you have the ssh private key.
 
-__note: This has been tested only on MacOS, use at your own discretion__ 
+__NOTE: This has been tested only on MacOS, use at your own discretion.__ 
 
 ### Install
 You need Go installed to get the package and install the binaries.
 ```shell script
-go get github.com/0x0042/ssh-user
+$ go get github.com/0x0042/ssh-user
 ```
 
 ### Basic how to use.
