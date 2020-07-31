@@ -62,3 +62,8 @@ To use a different config file
 ```shell script
 $ ssh-user -config ./my/working/config 0x0042
 ```
+
+To list the config file
+```shell script
+$ ssh-user -list
+```
