@@ -1,4 +1,4 @@
-module github.com/0x0042/ssh-user
+module github.com/9M6/ssh-user
 
 go 1.14
 

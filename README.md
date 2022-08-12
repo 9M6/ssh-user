@@ -14,7 +14,7 @@ __NOTE: This has been tested only on MacOS, use at your own discretion.__
 ### Install
 You need Go installed to get the package and install the binaries.
 ```shell script
-$ go get github.com/0x0A9/ssh-user
+$ go install github.com/9M6/ssh-user
 ```
 
 ### Basic how to use.
@@ -41,8 +41,8 @@ $ ssh-user -help
 ### Switching Users
 Given that you have the following
 ```shell script
--rw-------  0x0A9 # Private Key
--rw-r--r--  0x0A9.pub # Public Key
+-rw-------  9M6 # Private Key
+-rw-r--r--  9M6.pub # Public Key
 -rw-r--r--  config # Your config file
 -rw-------  id_rsa # Private Key
 -rw-r--r--  id_rsa.pub # Public Key
@@ -52,7 +52,7 @@ Each key represents a acconnection to an "account".
 
 #### Switching Users
 ```shell script
-$ ssh-user 0x0A9
+$ ssh-user 9M6
 ```
 
 ```shell script
@@ -63,12 +63,12 @@ $ ssh-user id_rsa
 
 To select a specific host
 ```shell script
-$ ssh-user -host=github.com 0x0A9
+$ ssh-user -host=github.com 9M6
 ```
 
 To use a different config file
 ```shell script
-$ ssh-user -config ./my/working/config 0x0A9
+$ ssh-user -config ./my/working/config 9M6
 ```
 
 To list the config file
